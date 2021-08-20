@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import useForm from '../../hooks/form.js';
 import Pagination from '../pagination/pagination';
 import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
+import { SettingsContext } from '../../context/settings';
 
 import { v4 as uuid } from 'uuid';
 
 const ToDo = () => {
+  const settings = useContext(SettingsContext);
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem);
@@ -39,13 +41,15 @@ const ToDo = () => {
     let incompleteCount = list.filter((item) => !item.complete);
     setIncomplete(incompleteCount);
     document.title = `To Do List: ${incomplete.length}`;
-  }, [list]);
+  }, [list, settings.showCompleted]);
 
   return (
     <>
       <div className='form-container'>
         <header>
-          <h1>To Do List: {incomplete.length} items pending</h1>
+          <h1>
+            To Do List: {incomplete.length} items pending, and {list.length - incomplete.length} completed
+          </h1>
         </header>
 
         <h2>Add To Do Item</h2>

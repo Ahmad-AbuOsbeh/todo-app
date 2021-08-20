@@ -6,17 +6,19 @@ import { Button } from '@blueprintjs/core';
 export default function Pagination(props) {
   let btnArr = [];
   const settings = useContext(SettingsContext);
-  const [choosenList, setChoosenList] = useState(settings.showCompleted ? props.list : props.incomplete);
+  const [choosenList, setChoosenList] = useState(settings.showCompleted == 'true' ? props.list : props.incomplete);
   const [activeList, setActiveList] = useState(choosenList.slice(0, settings.itemsPerPage));
   const [numberOfPages, setNumberOfPages] = useState(Math.ceil(choosenList.length / settings.itemsPerPage));
   const [activePage, setActivePage] = useState(1);
   const [buttonsArray, setButtonsArray] = useState(btnArr);
 
   useEffect(() => {
-    setChoosenList(settings.showCompleted ? props.list : props.incomplete);
+    setChoosenList(settings.showCompleted == 'true' ? props.list : props.incomplete);
+  }, [props.list, props.incomplete, settings.showCompleted]);
+  useEffect(() => {
     setActiveList(choosenList);
     setNumberOfPages(Math.ceil(choosenList.length / settings.itemsPerPage));
-  }, [props.list, props.incomplete, choosenList, settings.itemsPerPage]);
+  }, [choosenList, settings.itemsPerPage]);
 
   useEffect(() => {
     if (numberOfPages) {
@@ -36,8 +38,8 @@ export default function Pagination(props) {
 
   useEffect(() => {
     let start = (activePage - 1) * settings.itemsPerPage;
-    let end = start + settings.itemsPerPage;
-
+    let end = start + Number(settings.itemsPerPage);
+    console.log('start, end', start, end);
     setActiveList(choosenList.slice(start, end));
   }, [activePage, settings.itemsPerPage, choosenList]);
 
@@ -46,13 +48,6 @@ export default function Pagination(props) {
       setActivePage(activePage - 1);
     }
   }, [activeList]);
-
-  //   useEffect(() => {
-  //     console.log('props.list', props.list);
-  //     console.log('props.incomplete', props.incomplete);
-  //     console.log('choosenList', choosenList);
-  //     console.log('choosenList.length', choosenList.length);
-  //   }, [choosenList, props.list, props.incomplete]);
 
   function handlePages(pageNumber) {
     console.log(typeof pageNumber);

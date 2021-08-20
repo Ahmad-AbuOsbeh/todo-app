@@ -42,3 +42,8 @@ body {
 header {
   color: darkgoldenrod;
 }
+
+Button {
+  background-color: darkgoldenrod !important;
+  margin: 0.1rem;
+}

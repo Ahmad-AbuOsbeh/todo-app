@@ -25,3 +25,29 @@
 ## UML :
 
 - ![UML-lab31](src/images/UML-lab31.jpg)
+
+<br/>
+
+# LAB 32 - Context API - Behaviors
+
+### Description : this phase was refactoring and editing on TO DO App by :
+
+#### 1. converting all class components to functional ones.
+
+#### 2. adding settings to edit and control the context.
+
+#### 3. save the selection to local storage.
+
+#### 4. using React Browser Routes.
+
+## PR link :
+
+- [https://github.com/Ahmad-AbuOsbeh/todo-app/pull/2](https://github.com/Ahmad-AbuOsbeh/todo-app/pull/2)
+
+## Deployed link :
+
+- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+
+## UML :
+
+- ![UML-lab31](src/images/UML-lab32.jpg)

@@ -20,7 +20,7 @@
 
 ## Deployed link :
 
-- []()
+- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
 
 ## UML :
 

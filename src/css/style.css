@@ -1,0 +1,44 @@
+@import '~normalize.css';
+@import '~@blueprintjs/core/lib/css/blueprint.css';
+@import '~@blueprintjs/icons/lib/css/blueprint-icons.css';
+
+.card {
+  width: fit-content;
+  /* display: inline-flex; */
+  margin: 1rem;
+}
+
+.cardsContainer {
+  display: inline-flex;
+  margin-bottom: 5.5rem;
+  color: darkgoldenrod;
+  font-size: larger;
+  font-weight: bold;
+}
+
+body {
+  background-color: rgba(24, 11, 36, 0.932);
+  padding: 1rem;
+  color: whitesmoke;
+}
+
+.pagination-buttons {
+  margin: 0.25rem;
+}
+#text-input {
+  width: 13rem;
+}
+
+.pagList-container {
+  float: right;
+}
+
+.form-container {
+  float: left;
+  margin-right: 5rem;
+}
+
+.Navbar,
+header {
+  color: darkgoldenrod;
+}

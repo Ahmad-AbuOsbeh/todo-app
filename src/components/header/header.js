@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../css/style.css';
 import { Navbar, Alignment, Button } from '@blueprintjs/core';
+import { LoginContext } from '../../context/Login-context';
 import { Link } from 'react-router-dom';
+import Login from '../login/login';
 
 export default function Header() {
+  const loginContext = useContext(LoginContext);
   return (
     <>
       <Navbar className='Navbar'>
@@ -17,6 +20,7 @@ export default function Header() {
           <Link to='/settings'>
             <Button className='bp3-minimal' icon='settings' text='Settings' />
           </Link>
+          {loginContext.loggedin && <Login></Login>}
         </Navbar.Group>
       </Navbar>
     </>

@@ -50,4 +50,28 @@
 
 ## UML :
 
-- ![UML-lab31](src/images/UML-lab32.jpg)
+- ![UML-lab32](src/images/UML-lab32.jpg)
+
+<br/>
+
+# LAB 33 - Login and Auth
+
+### Description : this phase was refactoring and editing on TO DO App by :
+
+#### 1. adding sign in and sign up connected to real API.
+
+#### 2. add basic and bearer auth.
+
+#### 3. feature customization based on user role and capability.
+
+## PR link :
+
+- [https://github.com/Ahmad-AbuOsbeh/todo-app/pull/3](https://github.com/Ahmad-AbuOsbeh/todo-app/pull/3)
+
+## Deployed link :
+
+- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+
+## UML :
+
+- ![UML-lab33](src/images/UML-lab33.jpg)

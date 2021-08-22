@@ -30,16 +30,24 @@ export default function LoginForm(props) {
     }
   }
 
-  // useEffect
-  useEffect(() => {}, [loginContext.userCapability]);
-
+  // validate token handler
+  function validateToken(token) {
+    if (token == 'null' || token == 'undefined' || typeof token == 'undefined') {
+      setLoginState(false, null, {});
+    } else {
+      const userFromDecode = jwt.decode(token);
+      setLoginState(true, token, userFromDecode);
+    }
+  }
   // DiD Mount
   useEffect(() => {
     const tokenFromCokie = cookie.load('auth');
 
     validateToken(tokenFromCokie);
     const capability = cookie.load('capability');
-    loginContext.setuserCapability(capability);
+    if (capability) {
+      loginContext.setuserCapability(JSON.parse(capability));
+    }
   }, []);
 
   // Sign-IN handler
@@ -47,22 +55,12 @@ export default function LoginForm(props) {
     e.preventDefault();
     try {
       const response = await superagent.post(`${API}/signin`).set('authorization', `Basic ${base64.encode(`${user.username}:${Number(user.password)}`)}`);
-      loginContext.setuserCapability(response.body.user.acl.capabilities);
-      cookie.save('capability', response.body.user.acl.capabilities);
+      loginContext.setuserCapability(response.body.user.acl.capabilities.length);
+      cookie.save('capability', JSON.stringify(response.body.user.acl.capabilities.length));
 
       validateToken(response.body.token);
     } catch (e) {
       console.error('sign in ERROR', e.message);
-    }
-  }
-
-  // validate token handler
-  function validateToken(token) {
-    if (token !== 'null' && token !== 'undefined') {
-      const userFromDecode = jwt.decode(token);
-      setLoginState(true, token, userFromDecode);
-    } else {
-      setLoginState(false, null, {});
     }
   }
 

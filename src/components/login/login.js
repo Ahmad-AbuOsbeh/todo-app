@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { LoginContext } from '../../context/Login-context';
-import { Navbar, Alignment, Button } from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 import cookie from 'react-cookies';
 
 export default function Login(props) {

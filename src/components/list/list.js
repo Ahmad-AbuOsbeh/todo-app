@@ -9,7 +9,7 @@ export default function List(props) {
       {props.activeList.map((item) => (
         <div className='cardsContainer'>
           <Card interactive={true} elevation={Elevation.TWO} key={item._id} className='card'>
-            {logincontext.userCapability.length > 3 && <Button onClick={() => props.deleteItem(item._id)} icon='cross' id='delete-btn'></Button>}
+            {logincontext.userCapability > 3 && <Button onClick={() => props.deleteItem(item._id)} icon='cross' id='delete-btn'></Button>}
             <p>{item.text}</p>
             <p>
               <small>Assigned to: {item.assignee}</small>
@@ -17,7 +17,7 @@ export default function List(props) {
             <p>
               <small>Difficulty: {item.difficulty}</small>
             </p>
-            {logincontext.userCapability.length > 2 && <Button onClick={() => props.toggleComplete(item._id)}>Complete: {item.complete?.toString()}</Button>}
+            {logincontext.userCapability > 2 && <Button onClick={() => props.toggleComplete(item._id)}>Complete: {item.complete?.toString()}</Button>}
           </Card>
           <br />
         </div>

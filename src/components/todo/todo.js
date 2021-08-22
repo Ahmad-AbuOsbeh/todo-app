@@ -5,6 +5,7 @@ import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
 import { SettingsContext } from '../../context/settings';
 import { LoginContext } from '../../context/Login-context';
 import superagent from 'superagent';
+import cookie from 'react-cookies';
 
 // import { v4 as uuid } from 'uuid';
 
@@ -12,13 +13,25 @@ const ToDo = () => {
   const API = 'https://api-js401.herokuapp.com';
 
   const settings = useContext(SettingsContext);
-  const logincontext = useContext(LoginContext);
+  const loginContext = useContext(LoginContext);
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem);
 
-  //Did Mount
+  // // DiD Mount
   useEffect(async () => {
+    const capability = cookie.load('capability');
+    if (capability) {
+      loginContext.setuserCapability(JSON.parse(capability));
+    }
+    const items = localStorage.getItem('items');
+    if (items) {
+      settings.setItemsPerPage(JSON.parse(items));
+    }
+    const completed = localStorage.getItem('completed');
+    if (completed) {
+      settings.setShowCompleted(JSON.parse(completed));
+    }
     const response = await superagent.get(`${API}/api/v1/todo`);
 
     setList(response.body.results);
@@ -28,14 +41,15 @@ const ToDo = () => {
     const response = await superagent.get(`${API}/api/v1/todo`);
 
     setList(response.body.results);
-  }, [logincontext.isUpdated, settings.showCompleted, settings.itemsPerPage]);
+  }, [loginContext.isUpdated, settings.showCompleted, settings.itemsPerPage]);
 
   async function addItem(item) {
     try {
       // item.id = uuid();
       item.complete = false;
-      const response = await superagent.post(`${API}/api/v1/todo`, item);
-      setList([...list, response.body]);
+      await superagent.post(`${API}/api/v1/todo`, item);
+      // setList([...list, response.body]);
+      loginContext.setIsUpdated(!loginContext.isUpdated);
     } catch (e) {
       console.error('Add Item Error', e.message);
     }
@@ -63,8 +77,8 @@ const ToDo = () => {
         return item;
       });
       await superagent.put(`${API}/api/v1/todo/${id}`, updatedItem);
-      logincontext.setIsUpdated(!logincontext.isUpdated);
-      setList(items);
+      loginContext.setIsUpdated(!loginContext.isUpdated);
+      // setList(items);
     } catch (e) {
       console.error('update Item Error', e.message);
     }
@@ -85,7 +99,7 @@ const ToDo = () => {
           </h1>
         </header>
 
-        {logincontext.userCapability.length > 1 && (
+        {loginContext.userCapability > 1 && (
           <>
             <h2>Add To Do Item</h2>
             <form onSubmit={handleSubmit}>
@@ -101,7 +115,7 @@ const ToDo = () => {
               <label>
                 <Button type='submit'>Add Item</Button>
               </label>
-            </form>{' '}
+            </form>
           </>
         )}
       </div>

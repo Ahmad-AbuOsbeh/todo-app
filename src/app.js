@@ -24,7 +24,7 @@ export default function App() {
               <ToDo />
             </Route>
             <Route exact path='/settings'>
-              <Form />
+              {logincontext.userCapability.length > 1 && <Form />}
             </Route>
           </Switch>
         )}

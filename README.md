@@ -75,3 +75,25 @@
 ## UML :
 
 - ![UML-lab33](src/images/UML-lab33.jpg)
+
+<br/>
+
+# LAB 34 - API Integration
+
+### Description : this phase was refactoring and editing on TO DO App by :
+
+#### 1. connect all CRUD operations to real API.
+
+#### 2. activate the delete feature for the admin only.
+
+## PR link :
+
+- [https://github.com/Ahmad-AbuOsbeh/todo-app/pull/4](https://github.com/Ahmad-AbuOsbeh/todo-app/pull/4)
+
+## Deployed link :
+
+- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+
+## UML :
+
+- ![UML-lab34](src/images/UML-lab34.jpg)

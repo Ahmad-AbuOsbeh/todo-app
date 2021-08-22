@@ -1,10 +1,13 @@
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { SettingsContext } from '../../context/settings';
+import { LoginContext } from '../../context/Login-context';
+
 import List from '../list/list';
 import { Button } from '@blueprintjs/core';
 
 export default function Pagination(props) {
   let btnArr = [];
+  const logincontext = useContext(LoginContext);
   const settings = useContext(SettingsContext);
   const [choosenList, setChoosenList] = useState(settings.showCompleted == 'true' ? props.list : props.incomplete);
   const [activeList, setActiveList] = useState(choosenList.slice(0, settings.itemsPerPage));
@@ -22,8 +25,6 @@ export default function Pagination(props) {
 
   useEffect(() => {
     if (numberOfPages) {
-      console.log('hello from if', numberOfPages);
-
       btnArr.push('Prev');
 
       for (let i = 1; i <= numberOfPages; i++) {
@@ -39,7 +40,6 @@ export default function Pagination(props) {
   useEffect(() => {
     let start = (activePage - 1) * settings.itemsPerPage;
     let end = start + Number(settings.itemsPerPage);
-    console.log('start, end', start, end);
     setActiveList(choosenList.slice(start, end));
   }, [activePage, settings.itemsPerPage, choosenList]);
 
@@ -50,7 +50,8 @@ export default function Pagination(props) {
   }, [activeList]);
 
   function handlePages(pageNumber) {
-    console.log(typeof pageNumber);
+    logincontext.setIsUpdated(!logincontext.isUpdated);
+
     if (pageNumber == 'Prev' && buttonsArray.includes(activePage - 1)) {
       setActivePage(activePage - 1);
     } else if (pageNumber == 'Next' && buttonsArray.includes(activePage + 1)) {
@@ -63,14 +64,12 @@ export default function Pagination(props) {
   return (
     <>
       <br />
-      <List activeList={activeList} toggleComplete={props.toggleComplete} />
-      {console.log('buttonsArray', buttonsArray)}
+      <List activeList={activeList} toggleComplete={props.toggleComplete} deleteItem={props.deleteItem} />
       <br />
 
       {buttonsArray &&
         buttonsArray.map((item) => (
           <>
-            {console.log('item', item)}
             <Button onClick={() => handlePages(item)} className='pagination-buttons'>
               {item}
             </Button>

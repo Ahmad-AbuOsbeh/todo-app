@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navbar, Alignment, Button, FormGroup, InputGroup } from '@blueprintjs/core';
+import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
 import { LoginContext } from '../../context/Login-context';
 import superagent from 'superagent';
 import base64 from 'base-64';
@@ -9,7 +9,6 @@ export default function LoginForm(props) {
   const API = 'https://api-js401.herokuapp.com';
   const loginContext = useContext(LoginContext);
   const [user, setuser] = useState({});
-  const [signUpUser, setsignUpUser] = useState({});
   const [signInUser, setsignInUser] = useState({});
 
   // on Change
@@ -20,55 +19,47 @@ export default function LoginForm(props) {
   // Sign-UP handler
   async function handleSignup(e) {
     e.preventDefault();
-    console.log(';sign up');
 
     try {
-      console.log('user', user);
       const response = await superagent.post(`${API}/signup`, user);
 
-      console.log('response.body', response.body);
-      setsignUpUser({ token: response.body.token, capabilities: response.body.user.acl.capabilities });
-    } catch (e) {
-      console.error('sign up ERROR', e.message);
+      alert(`successfuly signed up with user name : ${response.body.user.username} \nplease sign in to continue..`);
+    } catch (error) {
+      console.error('sign up ERROR', error.message);
+      alert(`something wrong, check username ! `);
     }
   }
 
   // useEffect
-  useEffect(() => {
-    console.log('signInUser', signInUser);
-  }, [signInUser]);
+  useEffect(() => {}, [loginContext.userCapability]);
 
   // DiD Mount
   useEffect(() => {
     const tokenFromCokie = cookie.load('auth');
 
     validateToken(tokenFromCokie);
+    const capability = cookie.load('capability');
+    loginContext.setuserCapability(capability);
   }, []);
 
   // Sign-IN handler
   async function handleSignin(e) {
     e.preventDefault();
-    console.log(';sign in');
     try {
-      console.log('user.passowrd', user.password);
       const response = await superagent.post(`${API}/signin`).set('authorization', `Basic ${base64.encode(`${user.username}:${Number(user.password)}`)}`);
-      console.log(response.body);
+      loginContext.setuserCapability(response.body.user.acl.capabilities);
+      cookie.save('capability', response.body.user.acl.capabilities);
+
       validateToken(response.body.token);
     } catch (e) {
       console.error('sign in ERROR', e.message);
     }
   }
 
-  // useEffect(() => {
-  //   validateToken(tokenFromCokie);
-
-  // }, [loginContext.loggedin]);
-
   // validate token handler
   function validateToken(token) {
     if (token !== 'null' && token !== 'undefined') {
       const userFromDecode = jwt.decode(token);
-      console.log(token, userFromDecode);
       setLoginState(true, token, userFromDecode);
     } else {
       setLoginState(false, null, {});
@@ -77,7 +68,6 @@ export default function LoginForm(props) {
 
   // setLoginState handler
   function setLoginState(loggedin, token, userFromDecode) {
-    console.log('loggedin tyyyyyyyype', loggedin, typeof loggedin);
     loginContext.setloggedin(loggedin);
     cookie.save('auth', token);
     setsignInUser(userFromDecode);
@@ -97,7 +87,7 @@ export default function LoginForm(props) {
               <option defaultValue>Select role..</option>
               <option value='admin'>Admin</option>
               <option value='editor'>Editor</option>
-              <option value='creator'>Creator</option>
+              {/* <option value='writer'>Writer</option> */}
               <option value='user'> User</option>
             </select>
             <span className='bp3-icon bp3-icon-double-caret-vertical'></span>

@@ -27,7 +27,7 @@ export default function Form() {
         <h2>TO DO Settings : </h2>
         <form>
           <FormGroup label='Items Per Page (1 - 10) :' labelFor='text-input'>
-            <InputGroup id='text-input' placeholder='# of items/page' type='Number' onChange={handleChange} name='items' value={settings.itemsPerPage} min='1' max='10' />
+            <InputGroup id='text-input' placeholder='# of items/page' type='Number' onChange={handleChange} name='items' value={settings.itemsPerPage ? settings.showCompleted : 2} min='1' max='10' />
           </FormGroup>
           <FormGroup helperText='' label='Show Completed :' labelFor='text-input' labelInfo=''>
             <div className='bp3-html-select .modifier'>

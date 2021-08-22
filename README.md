@@ -20,7 +20,7 @@
 
 ## Deployed link :
 
-- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+- [https://todo-app-ahmad-abuosbeh.netlify.app/](https://todo-app-ahmad-abuosbeh.netlify.app/)
 
 ## UML :
 
@@ -46,7 +46,7 @@
 
 ## Deployed link :
 
-- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+- [https://todo-app-ahmad-abuosbeh.netlify.app/](https://todo-app-ahmad-abuosbeh.netlify.app/)
 
 ## UML :
 
@@ -70,7 +70,7 @@
 
 ## Deployed link :
 
-- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+- [https://todo-app-ahmad-abuosbeh.netlify.app/](https://todo-app-ahmad-abuosbeh.netlify.app/)
 
 ## UML :
 
@@ -92,7 +92,7 @@
 
 ## Deployed link :
 
-- [https://todo-ahmad-abuosbeh.netlify.app/](https://todo-ahmad-abuosbeh.netlify.app/)
+- [https://todo-app-ahmad-abuosbeh.netlify.app/](https://todo-app-ahmad-abuosbeh.netlify.app/)
 
 ## UML :
 

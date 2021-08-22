@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 export const LoginContext = React.createContext();
 export default function Login(props) {
   const [loggedin, setloggedin] = useState(false);
-  const [user, setuser] = useState({});
+  const [userCapability, setuserCapability] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(false);
   return (
     <>
-      <LoginContext.Provider value={{ loggedin, setloggedin, user, setuser }}>{props.children}</LoginContext.Provider>
+      <LoginContext.Provider value={{ loggedin, setloggedin, userCapability, setuserCapability, isUpdated, setIsUpdated }}>{props.children}</LoginContext.Provider>
     </>
   );
 }

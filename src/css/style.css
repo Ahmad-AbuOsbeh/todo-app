@@ -47,3 +47,8 @@ Button {
   background-color: darkgoldenrod !important;
   margin: 0.1rem;
 }
+
+#delete-btn {
+  background-color: #ffffff !important;
+  float: right;
+}
